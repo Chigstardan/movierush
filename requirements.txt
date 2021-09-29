@@ -1,5 +1,4 @@
 requests==0.11.1
-urllib
 praw==3.6.1
 time
 beautifulsoup4==4.1.3
