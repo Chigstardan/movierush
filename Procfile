@@ -1,1 +1,1 @@
-web: python recent_releases.py
+worker: python recent_releases.py
