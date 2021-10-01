@@ -14,6 +14,6 @@ printed = []
 print(filmName)
 while True:
 	if filmName not in printed:
-		requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(filmName))
-		time.sleep(10)
+		requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=1147912549&text={}".format(filmName))
+		time.sleep(1200)
 		printed.append(filmName)
