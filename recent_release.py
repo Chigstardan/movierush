@@ -3,38 +3,29 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import Request, urlopen
 
-pages = ["movies", "series"]
-printed = []
-for page in pages:
-	req = Request("https://www.thenetnaija.com/videos/" + page, headers={'User-Agent': 'XYZ/3.0'})
 
-	webpage = urlopen(req, timeout=10)
-
-	b4 = BeautifulSoup(webpage, "html.parser")
-
-	movie_list = b4.find_all("div", {"class" : "video-files"})
-
-
-	for OldContainers in movie_list:
-		filmName = OldContainers.find('img').get('alt')
-		printed.append(filmName)
-		print(printed)
-	for old in printed:
-		requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(old))
-
-new_release = []
-
+req = Request("https://www.thenetnaija.com/videos/movies", headers={'User-Agent': 'XYZ/3.0'})
+req2 = Request("https://www.thenetnaija.com/videos/series", headers={'User-Agent': 'XYZ/3.0'})
+webpage = urlopen(req, timeout=10)
+webpage2 = urlopen(req2, timeout=10)
+b4 = BeautifulSoup(webpage, "html.parser")
+b5 = BeautifulSoup(webpage2, "html.parser")	
+movie_list = b4.find_all("div", {"class" : "video-files"})
+series_list = b5.find_all("div", {"class" : "video-files"})
+printed = set()
 while True:
-	for page in pages:
-		req = Request("https://www.thenetnaija.com/videos/" + page, headers={'User-Agent': 'XYZ/3.0'})
-		webpage = urlopen(req, timeout=10)
-		b4 = BeautifulSoup(webpage, "html.parser")
-		movie_list = b4.find_all("div", {"class" : "video-files"})
-		
-		for NewContainers in movie_list:
-			new_filmName = NewContainers.find('img').get('alt')
-			new_release.append(new_filmName)
-	if new_release != printed:
-		for get in new_release:
-			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(get))
+	for movies in movie_list:
+		movie_name = movies.find('img').get('alt')
+		if movie_name not in printed:
+			printed.add(movie_name)
+			print(movie_name)
+			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(movie_name))
+
+	for series in series_list:
+		series_name = series.find('img').get('alt')
+		if series_name not in printed:
+			printed.add(series_name)
+			print(series_name)
+			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(series_name))
+
 	time.sleep(1800)
