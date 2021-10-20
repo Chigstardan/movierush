@@ -19,13 +19,13 @@ while True:
 		if movie_name not in printed:
 			printed.add(movie_name)
 			print(movie_name)
-			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(movie_name))
+			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=1147912549&text={}".format(movie_name))
 
 	for series in series_list:
 		series_name = series.find('img').get('alt')
 		if series_name not in printed:
 			printed.add(series_name)
 			print(series_name)
-			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=805427106&text={}".format(series_name))
+			requests.get("https://api.telegram.org/bot2008959598:AAEapVykIXdphGYaH5ZjXuhpFaFw7wpi5Bs/sendMessage?chat_id=1147912549&text={}".format(series_name))
 
-	time.sleep(1800)
+	time.sleep(600)
